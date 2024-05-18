@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Setting2.cs" />
+    <Compile Include="Car.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="DescriptionServi.cs" />
+    <Compile Include="Detail.cs" />
+    <Compile Include="DetailsOnOrder.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="Servi.cs" />
+    <Compile Include="TypePay.cs" />
+    <Compile Include="Worker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+</Project>

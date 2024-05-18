@@ -1,0 +1,38 @@
+﻿@model DetailsOnOrderModel
+
+@{
+	var exists = Model != null && Model.DetailId != 0;
+	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " DetailsOnOrder";
+}
+
+<form asp-action="Update" asp-antiforgery="true" method="post">
+	<div class="row">
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="DetailId"></label>
+				<input type="text" asp-for="DetailId" class="form-control"/>
+				<span asp-validation-for="DetailId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="OrderId"></label>
+				<input type="text" asp-for="OrderId" class="form-control"/>
+				<span asp-validation-for="OrderId" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Count"></label>
+				<input type="text" asp-for="Count" class="form-control"/>
+				<span asp-validation-for="Count" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<button class="btn btn-outline-primary" type="submit">@(exists ? "Сохранить" : "Добавить")</button>
+			<a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+		</div>
+	</div>
+</form>
