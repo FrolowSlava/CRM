@@ -22,6 +22,7 @@
     <Compile Include="Areas\Admin\Models\FileManager\FileModel.cs" />
     <Compile Include="Areas\Admin\Models\FileManager\RenameError.cs" />
     <Compile Include="Areas\Admin\Models\FileManager\UploadError.cs" />
+    <Compile Include="Areas\Admin\Models\ViewModels\CarViewModel.cs" />
     <Compile Include="Areas\Public\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Public\Controllers\HomeController.cs" />
     <Compile Include="Extensions\Mvc\AddressesHelper.cs" />

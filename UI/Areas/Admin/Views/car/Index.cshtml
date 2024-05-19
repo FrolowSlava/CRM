@@ -1,9 +1,9 @@
-﻿@model SearchResultViewModel<CarModel>
+﻿@model CarViewModel
 
 @{
-	ViewBag.Title = "car";
-	var pagedList = Html.PagedList(Model.PagesInfo.ItemsCount, Model.PagesInfo.ItemsPerPage, Model.PagesInfo.CurrentPage,
-		Model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
+	ViewBag.Title = "Машины";
+	var pagedList = Html.PagedList(Model.carModel.PagesInfo.ItemsCount, Model.carModel.PagesInfo.ItemsPerPage, Model.carModel.PagesInfo.CurrentPage,
+		Model.carModel.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
 		{
 			page = pageNumber
 		}), new PagedListExtensions.PagedListRenderParams());
@@ -31,18 +31,35 @@
 			<table class="table table-striped">
 				<tr>
 					<th class="text-center">ID</th>
+					<th class="text-center">Модель</th>
+					<th class="text-center">Год выпуска</th>
+					<th class="text-center">Пробег</th>
+					<th class="text-center">Клиент</th>
 					<th class="text-center">Действия</th>
 				</tr>
-				@foreach (var item in Model.Objects)
+				@foreach (var car in Model.carModel.Objects)
 				{
-					<tr>
+                    var client = Model.clientModel.Objects.Where(client => client.ClientId == car.ClientId).ToList();
+                    <tr>
 						<td class="text-center">
-							@item.CarId
-						</td>
-						<td class="text-center">
-							<a asp-action="Update" asp-route-id="@item.CarId">Изменить</a><br/>
-							<a asp-action="Delete" asp-route-id="@item.CarId" class="delete-object-button">Удалить</a>
-						</td>
+                            @car.CarId
+                        </td>
+                        <td class="text-center">
+                            @car.Model
+                        </td>
+                        <td class="text-center">
+                            @car.Year
+                        </td>
+                        <td class="text-center">
+                            @car.Mileage
+                        </td>
+                        <td class="text-center">
+                            @Html.Raw(string.Join(", ", client.Select(s => string.Format("{0}", s.Name))))
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Update" asp-route-id="@car.CarId">Изменить</a><br />
+                            <a asp-action="Delete" asp-route-id="@car.CarId" class="delete-object-button">Удалить</a>
+                        </td>
 					</tr>
 				}
 			</table>

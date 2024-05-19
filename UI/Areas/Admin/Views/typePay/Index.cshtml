@@ -1,7 +1,7 @@
 ﻿@model SearchResultViewModel<TypePayModel>
 
 @{
-	ViewBag.Title = "typePay";
+	ViewBag.Title = "Тип оплаты";
 	var pagedList = Html.PagedList(Model.PagesInfo.ItemsCount, Model.PagesInfo.ItemsPerPage, Model.PagesInfo.CurrentPage,
 		Model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
 		{
@@ -31,6 +31,8 @@
 			<table class="table table-striped">
 				<tr>
 					<th class="text-center">ID</th>
+					<th class="text-center">Картой</th>
+					<th class="text-center">Наличными</th>
 					<th class="text-center">Действия</th>
 				</tr>
 				@foreach (var item in Model.Objects)
@@ -39,7 +41,13 @@
 						<td class="text-center">
 							@item.TypePayId
 						</td>
-						<td class="text-center">
+                        <td class="text-center">
+                            @item.ByCard
+                        </td>
+                        <td class="text-center">
+                            @item.ByCash
+                        </td>
+                        <td class="text-center">
 							<a asp-action="Update" asp-route-id="@item.TypePayId">Изменить</a><br/>
 							<a asp-action="Delete" asp-route-id="@item.TypePayId" class="delete-object-button">Удалить</a>
 						</td>

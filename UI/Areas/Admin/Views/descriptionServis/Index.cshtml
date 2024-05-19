@@ -1,7 +1,7 @@
 ﻿@model SearchResultViewModel<DescriptionServiModel>
 
 @{
-	ViewBag.Title = "descriptionServis";
+	ViewBag.Title = "Описание услуг";
 	var pagedList = Html.PagedList(Model.PagesInfo.ItemsCount, Model.PagesInfo.ItemsPerPage, Model.PagesInfo.CurrentPage,
 		Model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
 		{
@@ -30,7 +30,10 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
-					<th class="text-center">ID</th>
+					<th class="text-center">ID описания услуги</th>
+					<th class="text-center">ID услуги</th>
+					<th class="text-center">ID заказа</th>
+					<th class="text-center">ID работника</th>
 					<th class="text-center">Действия</th>
 				</tr>
 				@foreach (var item in Model.Objects)
@@ -39,7 +42,16 @@
 						<td class="text-center">
 							@item.DescriptionServisId
 						</td>
-						<td class="text-center">
+                        <td class="text-center">
+                            @item.ServisId
+                        </td>
+                        <td class="text-center">
+                            @item.OrderId
+                        </td>
+                        <td class="text-center">
+                            @item.WorkerId
+                        </td>
+                        <td class="text-center">
 							<a asp-action="Update" asp-route-id="@item.DescriptionServisId">Изменить</a><br/>
 							<a asp-action="Delete" asp-route-id="@item.DescriptionServisId" class="delete-object-button">Удалить</a>
 						</td>

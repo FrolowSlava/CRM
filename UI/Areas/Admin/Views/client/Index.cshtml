@@ -1,7 +1,7 @@
 ﻿@model SearchResultViewModel<ClientModel>
 
 @{
-	ViewBag.Title = "client";
+	ViewBag.Title = "Клиенты";
 	var pagedList = Html.PagedList(Model.PagesInfo.ItemsCount, Model.PagesInfo.ItemsPerPage, Model.PagesInfo.CurrentPage,
 		Model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), new
 		{
@@ -30,8 +30,13 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
-					<th class="text-center">ID</th>
-					<th class="text-center">Действия</th>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Имя</th>
+                    <th class="text-center">Телефон</th>
+                    <th class="text-center">Заказ</th>
+                    <th class="text-center">Заказ</th>
+                    <th class="text-center">Потраченная сумма</th>
+                    <th class="text-center">Бонусный уровень</th>
 				</tr>
 				@foreach (var item in Model.Objects)
 				{
@@ -39,7 +44,22 @@
 						<td class="text-center">
 							@item.ClientId
 						</td>
-						<td class="text-center">
+                        <td class="text-center">
+                            @item.Name
+                        </td>
+                        <td class="text-center">
+                            @item.Phone
+                        </td>
+                        <td class="text-center">
+                            @item.Order
+                        </td>
+                        <td class="text-center">
+                            @item.SpentSum
+                        </td>
+                        <td class="text-center">
+                            @item.BonusLevel
+                        </td>
+                        <td class="text-center">
 							<a asp-action="Update" asp-route-id="@item.ClientId">Изменить</a><br/>
 							<a asp-action="Delete" asp-route-id="@item.ClientId" class="delete-object-button">Удалить</a>
 						</td>

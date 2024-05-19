@@ -20,13 +20,30 @@ namespace UI.Areas.Admin.Controllers
 		public async Task<IActionResult> Index(int page = 1)
 		{
 			const int objectsPerPage = 20;
-			var searchResult = await new carBL().GetAsync(new carSearchParams
+			var searchResultCar = await new carBL().GetAsync(new carSearchParams
 			{
 				StartIndex = (page - 1) * objectsPerPage,
 				ObjectsCount = objectsPerPage,
 			});
-			var viewModel = new SearchResultViewModel<CarModel>(CarModel.FromEntitiesList(searchResult.Objects), 
-				searchResult.Total, searchResult.RequestedStartIndex, searchResult.RequestedObjectsCount, 5);
+			var viewModelCar = new SearchResultViewModel<CarModel>(CarModel.FromEntitiesList(searchResultCar.Objects), 
+				searchResultCar.Total, searchResultCar.RequestedStartIndex, searchResultCar.RequestedObjectsCount, 5);
+
+			
+			var searchResultClient = await new clientBL().GetAsync(new clientSearchParams
+			{
+				StartIndex = (page - 1) * objectsPerPage,
+				ObjectsCount = objectsPerPage,
+			});
+			var viewModelClient = new SearchResultViewModel<ClientModel>(ClientModel.FromEntitiesList(searchResultClient.Objects),
+				searchResultClient.Total, searchResultClient.RequestedStartIndex, searchResultClient.RequestedObjectsCount, 5);
+
+			var viewModel = new CarViewModel
+			{
+				carModel = viewModelCar,	
+				clientModel = viewModelClient	
+
+			};
+
 			return View(viewModel);
 		}
 
@@ -41,6 +58,8 @@ namespace UI.Areas.Admin.Controllers
 			}
 			return View(model);
 		}
+
+
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
